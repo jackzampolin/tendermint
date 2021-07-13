@@ -60,8 +60,8 @@ func TestDispatcherReturnsNoBlock(t *testing.T) {
 	doneCh := make(chan struct{})
 
 	go func() {
-		err := d.respond(nil, peerFromSet)
-		require.Nil(t, err)
+		<-ch
+		require.NoError(t, d.respond(nil, peerFromSet))
 		close(doneCh)
 	}()
 
